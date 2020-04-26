@@ -1,0 +1,15 @@
+version: '2.2'
+services:
+    teamcity-server-instance:
+        image: jetbrains/teamcity-server
+        volumes: 
+            -.Teamcity/Data:/Data
+            -.TeamCity/Logs:/Logs
+        ports:
+            - "8111:811"
+    teamcity-server-agent:
+        image: jetbrains/teamcity-agent
+        environment: 
+            SERVER_URL: "http://localhost:8111"
+        volumes: 
+            -.TeamCity/Agent/config:/config
